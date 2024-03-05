@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "방청소해야돼",
+      "content": "오늘은 꼭 청소를 하자",
+      "isDone": false
+    },
+    {
+      "id": 2,
+      "title": "설거지하기",
+      "content": "미뤄둔 설거지하기",
+      "isDone": true
+    },
+    {
+      "id": 3,
+      "title": "typeScript과제",
+      "content": "금요일까지 제출",
+      "isDone": false
+    }
+  ]
+}
