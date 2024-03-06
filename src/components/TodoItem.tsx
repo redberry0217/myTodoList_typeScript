@@ -2,25 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Todo } from "../axios/todos";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteTodo } from "../axios/todos";
 import { updateTodo } from "../axios/todos";
 import { useNavigate } from "react-router-dom";
 
 export default function TodoItem({ data }: { data: Todo[] }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
-  /** Todo 삭제 */
-  const deleteTodoMutation = useMutation(deleteTodo, {
-    onSuccess: () => {
-      alert(`Todo가 삭제되었습니다.`);
-      queryClient.invalidateQueries("todos");
-    },
-  });
-
-  const deteleOnClickHanlder = (id: string) => {
-    deleteTodoMutation.mutate(id);
-  };
 
   /** Todo 완료 상태 토글 */
   const isDoneToggleMutation = useMutation(updateTodo, {
@@ -50,7 +37,6 @@ export default function TodoItem({ data }: { data: Todo[] }) {
           </Title>
           <Content>{item.content}</Content>
           <Btns>
-            <Button onClick={() => deteleOnClickHanlder(item.id)}>삭제</Button>
             <Button onClick={() => isDoneToggleHandler(item.id, item.isDone)}>
               {item.isDone ? "취소" : "완료"}
             </Button>

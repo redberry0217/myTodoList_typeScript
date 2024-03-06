@@ -1,13 +1,6 @@
 {
   "todos": [
     {
-      "id": "352ed7dc-bdd5-4a3c-8969-2695f124c0af",
-      "title": "세탁기 돌리기",
-      "content": "그리고 다쓴 세제통도 재활용으로 버리기!",
-      "isDone": false,
-      "createdAt": "2024-03-06T13:28:14.066Z"
-    },
-    {
       "id": "6999c823-c7df-445a-a96d-772366f3203f",
       "title": "청소기 비우기",
       "content": "그리고 통 씻어서 말리기!!",
@@ -15,18 +8,18 @@
       "createdAt": "2024-03-06T13:28:46.977Z"
     },
     {
-      "id": "0167525d-4b25-422c-83d0-5e7a5b71fe49",
-      "title": "TypeScript 개인과제",
-      "content": "금요일까지 제출하니 스케줄 확인!",
-      "isDone": false,
-      "createdAt": "2024-03-06T13:29:28.990Z"
-    },
-    {
       "id": "497addb8-5e4b-4292-9882-ef89ff127c09",
       "title": "설거지",
       "content": "미뤄둔 설거지 꼭 하고 자기!",
       "isDone": true,
       "createdAt": "2024-03-06T13:29:54.724Z"
+    },
+    {
+      "id": "265912bc-7309-4cd4-90b6-3b6565c1e8e5",
+      "title": "방청소하기",
+      "content": "자기 전에 꼭 청소하고 자자",
+      "isDone": false,
+      "createdAt": "2024-03-06T14:01:59.066Z"
     }
   ]
 }
