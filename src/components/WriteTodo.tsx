@@ -1,28 +1,60 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import uuid4 from "uuid4";
+import { useMutation, useQueryClient } from "react-query";
+import { addTodo } from "../axios/todos";
 
 export default function WriteTodo() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const onSubmitHandler = () => {};
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(addTodo, {
+    onSuccess: () => {
+      alert(`Todo가 등록되었습니다.`);
+      queryClient.invalidateQueries("todos");
+    },
+  });
+
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!title || !content) {
+      alert(`제목과 내용을 모두 입력해주세요.`);
+      return;
+    }
+
+    const newTodo = {
+      id: uuid4(),
+      title,
+      content,
+      isDone: false,
+    };
+
+    mutation.mutate(newTodo);
+    setTitle("");
+    setContent("");
+  };
 
   return (
     <WriteTodoContainer>
       <Title>❤️ MY TODO LIST ❤️</Title>
       <InputArea onSubmit={onSubmitHandler}>
         <input
-          placeholder="제목"
+          placeholder="제목(10자까지 입력)"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          maxLength={10}
         />
         <input
-          placeholder="내용"
+          placeholder="내용(30자까지 입력)"
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          maxLength={30}
         />
-        <Button>등록</Button>
+        <Button>등록하기</Button>
       </InputArea>
     </WriteTodoContainer>
   );
@@ -48,6 +80,14 @@ const Title = styled.div`
 const InputArea = styled.form`
   display: flex;
   gap: 10px;
+
+  & > input {
+    width: 200px;
+    height: 25px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding-left: 10px;
+  }
 `;
 
 const Button = styled.button`
