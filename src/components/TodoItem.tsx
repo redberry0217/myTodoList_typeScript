@@ -21,8 +21,8 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   return (
     <>
       {data.map((item) => (
-        <Box key={item.id}>
-          <Title>{item.title}</Title>
+        <Box key={item.id} $isDone={item.isDone as boolean}>
+          <Title $isDone={item.isDone as boolean}>{item.title}</Title>
           <Content>{item.content}</Content>
           <Btns>
             <Button onClick={() => deteleOnClickHanlder(item.id)}>삭제</Button>
@@ -34,20 +34,24 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   );
 }
 
-const Box = styled.div`
+type IsDoneProps = {
+  $isDone: boolean;
+};
+
+const Box = styled.div<IsDoneProps>`
   width: 200px;
   padding: 10px;
-  background-color: white;
-  border: 1px solid #000000;
+  background-color: ${(props) => (props.$isDone ? "#fae3e9" : "white")};
   border-radius: 12px;
   display: flex;
   flex-direction: column;
 `;
 
-const Title = styled.span`
+const Title = styled.span<IsDoneProps>`
   font-size: 14pt;
   font-weight: bold;
-  color: #b96e83;
+  text-decoration: underline;
+  color: ${(props) => (props.$isDone ? "#525252" : "#b96e83")};
   line-height: 190%;
 `;
 

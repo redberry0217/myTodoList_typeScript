@@ -24,11 +24,11 @@ export default function TodoList() {
 
   return (
     <TodoListContainer>
-      <AreaLabel>✨Todo List</AreaLabel>
+      <AreaLabel>❤︎ Todo List</AreaLabel>
       <TodoArea>
         <TodoItem data={todoItemList} />
       </TodoArea>
-      <AreaLabel>✨Done List</AreaLabel>
+      <AreaLabel>❤︎ Done List</AreaLabel>
       <TodoArea>
         <TodoItem data={doneItemList} />
       </TodoArea>
@@ -38,12 +38,15 @@ export default function TodoList() {
 
 const TodoListContainer = styled.div`
   display: flex;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
+  background-color: #fff7f2;
 `;
 
 const AreaLabel = styled.div`
   width: 70%;
+  margin-left: 20px;
   font-size: 15pt;
   line-height: 190%;
   font-weight: bold;
@@ -58,4 +61,5 @@ const TodoArea = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+  box-shadow: 2px 2px 7px #966874;
 `;

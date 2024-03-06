@@ -73,8 +73,8 @@ const WriteTodoContainer = styled.div`
 
 const Title = styled.div`
   font-size: 17pt;
-  font-weight: bold;
   margin-bottom: 20px;
+  font-weight: bolder;
 `;
 
 const InputArea = styled.form`
@@ -82,11 +82,12 @@ const InputArea = styled.form`
   gap: 10px;
 
   & > input {
-    width: 200px;
-    height: 25px;
+    width: 250px;
+    height: 30px;
     border: 1px solid #000000;
     border-radius: 12px;
     padding-left: 10px;
+    font-size: 12pt;
   }
 `;
 
@@ -96,4 +97,6 @@ const Button = styled.button`
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  font-size: 13pt;
+  padding: 0 10px;
 `;
