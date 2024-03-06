@@ -1,28 +1,32 @@
 {
   "todos": [
     {
-      "id": "64451ea3-9615-4379-b95f-dd2a66920311",
-      "title": "방청소해야돼",
-      "content": "오늘은 꼭 청소를 하자",
-      "isDone": false
+      "id": "352ed7dc-bdd5-4a3c-8969-2695f124c0af",
+      "title": "세탁기 돌리기",
+      "content": "그리고 다쓴 세제통도 재활용으로 버리기!",
+      "isDone": false,
+      "createdAt": "2024-03-06T13:28:14.066Z"
     },
     {
-      "id": "264451ea3-9615-4379-b95f-dd2a63920317",
-      "title": "설거지하기",
-      "content": "미뤄둔 설거지하기",
-      "isDone": true
+      "id": "6999c823-c7df-445a-a96d-772366f3203f",
+      "title": "청소기 비우기",
+      "content": "그리고 통 씻어서 말리기!!",
+      "isDone": true,
+      "createdAt": "2024-03-06T13:28:46.977Z"
     },
     {
-      "id": "64451ea3-9615-4379-b95c-dd2a66920317",
-      "title": "typeScript과제",
-      "content": "금요일까지 제출",
-      "isDone": false
+      "id": "0167525d-4b25-422c-83d0-5e7a5b71fe49",
+      "title": "TypeScript 개인과제",
+      "content": "금요일까지 제출하니 스케줄 확인!",
+      "isDone": false,
+      "createdAt": "2024-03-06T13:29:28.990Z"
     },
     {
-      "id": "c6658a36-49d9-4758-a600-33641741bb2a",
-      "title": "오호홍오호홍",
-      "content": "이히힝이히힝",
-      "isDone": true
+      "id": "497addb8-5e4b-4292-9882-ef89ff127c09",
+      "title": "설거지",
+      "content": "미뤄둔 설거지 꼭 하고 자기!",
+      "isDone": true,
+      "createdAt": "2024-03-06T13:29:54.724Z"
     }
   ]
 }

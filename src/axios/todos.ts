@@ -6,6 +6,7 @@ export type Todo = {
   title: string;
   content: string;
   isDone: boolean;
+  createdAt: string;
 };
 
 export const getTodos = async (): Promise<Todo[]> => {

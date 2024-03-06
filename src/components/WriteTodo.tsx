@@ -3,6 +3,7 @@ import styled from "styled-components";
 import uuid4 from "uuid4";
 import { useMutation, useQueryClient } from "react-query";
 import { addTodo } from "../axios/todos";
+import { Outlet } from "react-router-dom";
 
 export default function WriteTodo() {
   const [title, setTitle] = useState<string>("");
@@ -29,6 +30,7 @@ export default function WriteTodo() {
       title,
       content,
       isDone: false,
+      createdAt: new Date().toISOString(),
     };
 
     mutation.mutate(newTodo);
@@ -37,26 +39,29 @@ export default function WriteTodo() {
   };
 
   return (
-    <WriteTodoContainer>
-      <Title>❤️ MY TODO LIST ❤️</Title>
-      <InputArea onSubmit={onSubmitHandler}>
-        <input
-          placeholder="제목(10자까지 입력)"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          maxLength={10}
-        />
-        <input
-          placeholder="내용(30자까지 입력)"
-          type="text"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          maxLength={30}
-        />
-        <Button>등록하기</Button>
-      </InputArea>
-    </WriteTodoContainer>
+    <>
+      <WriteTodoContainer>
+        <Title>❤️ MY TODO LIST ❤️</Title>
+        <InputArea onSubmit={onSubmitHandler}>
+          <input
+            placeholder="제목(15자까지 입력)"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            maxLength={15}
+          />
+          <input
+            placeholder="내용(30자까지 입력)"
+            type="text"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            maxLength={30}
+          />
+          <Button>등록하기</Button>
+        </InputArea>
+      </WriteTodoContainer>
+      <Outlet />
+    </>
   );
 }
 
@@ -84,7 +89,7 @@ const InputArea = styled.form`
   & > input {
     width: 250px;
     height: 30px;
-    border: 1px solid #000000;
+    border: 1px solid #966874;
     border-radius: 12px;
     padding-left: 10px;
     font-size: 12pt;

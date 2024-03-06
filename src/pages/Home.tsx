@@ -5,7 +5,6 @@ import TodoList from "../components/TodoList";
 function Home() {
   return (
     <>
-      <WriteTodo />
       <TodoList />
     </>
   );

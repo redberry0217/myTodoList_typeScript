@@ -4,9 +4,13 @@ import { Todo } from "../axios/todos";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteTodo } from "../axios/todos";
 import { updateTodo } from "../axios/todos";
+import { useNavigate } from "react-router-dom";
 
 export default function TodoItem({ data }: { data: Todo[] }) {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  /** Todo 삭제 */
   const deleteTodoMutation = useMutation(deleteTodo, {
     onSuccess: () => {
       alert(`Todo가 삭제되었습니다.`);
@@ -18,6 +22,7 @@ export default function TodoItem({ data }: { data: Todo[] }) {
     deleteTodoMutation.mutate(id);
   };
 
+  /** Todo 완료 상태 토글 */
   const isDoneToggleMutation = useMutation(updateTodo, {
     onSuccess: () => {
       queryClient.invalidateQueries("todos");
@@ -34,8 +39,15 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   return (
     <>
       {data.map((item) => (
-        <Box key={item.id} $isDone={item.isDone as boolean}>
-          <Title $isDone={item.isDone as boolean}>{item.title}</Title>
+        <Box
+          key={item.id}
+          $isDone={item.isDone as boolean}
+          onClick={() => navigate(`/detail/${item.id}`)}
+        >
+          <Title $isDone={item.isDone as boolean}>
+            {item.isDone ? "✔️" : null}
+            {item.title}
+          </Title>
           <Content>{item.content}</Content>
           <Btns>
             <Button onClick={() => deteleOnClickHanlder(item.id)}>삭제</Button>
@@ -60,6 +72,7 @@ const Box = styled.div<IsDoneProps>`
   border-radius: 12px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const Title = styled.span<IsDoneProps>`
@@ -72,13 +85,15 @@ const Title = styled.span<IsDoneProps>`
 
 const Content = styled.span`
   line-height: 180%;
+  height: 60px;
 `;
 
 const Btns = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 20px;
   gap: 7px;
+  bottom: 0px;
 `;
 
 const Button = styled.button`
