@@ -19,16 +19,10 @@
       "isDone": false
     },
     {
-      "id": "1965b587-1d5c-4395-b2f9-3f7853768555",
-      "title": "앗",
-      "content": "넵!",
-      "isDone": false
-    },
-    {
       "id": "c6658a36-49d9-4758-a600-33641741bb2a",
       "title": "오호홍오호홍",
       "content": "이히힝이히힝",
-      "isDone": false
+      "isDone": true
     }
   ]
 }

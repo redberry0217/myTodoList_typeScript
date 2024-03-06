@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Todo } from "../axios/todos";
-import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteTodo } from "../axios/todos";
+import { updateTodo } from "../axios/todos";
 
 export default function TodoItem({ data }: { data: Todo[] }) {
   const queryClient = useQueryClient();
-  const mutation = useMutation(deleteTodo, {
+  const deleteTodoMutation = useMutation(deleteTodo, {
     onSuccess: () => {
       alert(`Todo가 삭제되었습니다.`);
       queryClient.invalidateQueries("todos");
@@ -15,7 +15,20 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   });
 
   const deteleOnClickHanlder = (id: string) => {
-    mutation.mutate(id);
+    deleteTodoMutation.mutate(id);
+  };
+
+  const isDoneToggleMutation = useMutation(updateTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+  const isDoneToggleHandler = (id: string, isDone: boolean) => {
+    const updatedTodo = {
+      id: id,
+      isDone: !isDone,
+    };
+    isDoneToggleMutation.mutate(updatedTodo);
   };
 
   return (
@@ -26,7 +39,9 @@ export default function TodoItem({ data }: { data: Todo[] }) {
           <Content>{item.content}</Content>
           <Btns>
             <Button onClick={() => deteleOnClickHanlder(item.id)}>삭제</Button>
-            <Button>{item.isDone ? "취소" : "완료"}</Button>
+            <Button onClick={() => isDoneToggleHandler(item.id, item.isDone)}>
+              {item.isDone ? "취소" : "완료"}
+            </Button>
           </Btns>
         </Box>
       ))}

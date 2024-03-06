@@ -39,3 +39,22 @@ export const deleteTodo = async (id: string) => {
     console.log("Todo 삭제 에러", error);
   }
 };
+
+export type UpdatedTodo = {
+  id: string;
+  isDone: boolean;
+};
+
+export const updateTodo = async (todo: UpdatedTodo) => {
+  try {
+    await axios.patch(
+      `${process.env.REACT_APP_JSON_SERVER_URL}/todos/${todo.id}`,
+      {
+        isDone: todo.isDone,
+      }
+    );
+  } catch (error) {
+    alert(`Todo 상태를 변경하지 못했습니다. 다시 시도해주세요.`);
+    console.log("Todo 상태 변경 에러", error);
+  }
+};
