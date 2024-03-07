@@ -7,7 +7,7 @@ import { Todo } from "../types/todoTypes";
 export default function TodoList() {
   const [sortBy, setSortBy] = useState("");
   const { isLoading, isError, isIdle, doneItemList, todoItemList } = useTodo();
-  const [sortedData, setSortedData] = useState<Todo[]>(todoItemList);
+  const [sortedData, setSortedData] = useState<Todo[]>([]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
@@ -47,7 +47,7 @@ export default function TodoList() {
         </SortTodo>
       </LabelAndSort>
       <TodoArea>
-        <TodoItem data={sortedData} />
+        <TodoItem data={sortedData.length > 0 ? sortedData : todoItemList} />
       </TodoArea>
       <AreaLabel>❤︎ Done List</AreaLabel>
       <TodoArea>

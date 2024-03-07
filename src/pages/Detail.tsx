@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
 import { deleteTodo } from "../api/todoApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { dateFormat } from "../util/date";
 import { useTodo } from "../hooks/useTodo";
+import EditForm from "../components/EditForm";
 
 export default function Detail() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const [isEditing, setIsEditing] = useState(false);
 
-  /** Todo 삭제 */
+  const editOnClickHandler = () => {
+    setIsEditing(true);
+  };
+
+  /** Todo 삭제하기 */
   const deleteTodoMutation = useMutation(deleteTodo, {
     onSuccess: () => {
       queryClient.invalidateQueries("todos");
@@ -51,19 +57,41 @@ export default function Detail() {
   return (
     <>
       <DetailContainer>
-        <AreaLabel>❤︎ 내용 자세히 보기</AreaLabel>
+        <AreaLabel>
+          {isEditing ? "❤︎ 내용 수정하기" : "❤︎ 내용 자세히 보기"}
+        </AreaLabel>
         <DetailArea>
           <DetailContent>
-            <Title>{todoData.title}</Title>
-            <Content>{todoData.content}</Content>
-            <MoreInfo>❤️등록일: {formattedData}</MoreInfo>
-            <MoreInfo>
-              ❤️상태: {todoData.isDone ? "✔️이미 완료됨!" : "😮이제 해야함!"}
-            </MoreInfo>
+            {isEditing ? (
+              <EditForm todoData={todoData} setIsEditing={setIsEditing} />
+            ) : (
+              <>
+                <TitleAndPriority>
+                  <Title>{todoData.title}</Title>
+                  <PriorityItem $priority={todoData.priority}>
+                    {todoData.priority === 3
+                      ? "매우중요"
+                      : todoData.priority === 2
+                      ? "중요"
+                      : "보통"}
+                  </PriorityItem>
+                </TitleAndPriority>
+                <Content>{todoData.content}</Content>
+                <MoreInfo>❤️등록일: {formattedData}</MoreInfo>
+                <MoreInfo>
+                  ❤️상태:{" "}
+                  {todoData.isDone ? "✔️이미 완료됨!" : "😮이제 해야함!"}
+                </MoreInfo>
+              </>
+            )}
           </DetailContent>
           <Btns>
-            <Button>수정</Button>
-            <Button onClick={() => deteleOnClickHanlder(id)}>삭제</Button>
+            {isEditing ? null : (
+              <>
+                <Button onClick={editOnClickHandler}>수정</Button>
+                <Button onClick={() => deteleOnClickHanlder(id)}>삭제</Button>
+              </>
+            )}
           </Btns>
         </DetailArea>
         <GoBackBtn onClick={() => navigate(`/`)}>뒤로가기</GoBackBtn>
@@ -91,10 +119,12 @@ const AreaLabel = styled.div`
 
 const DetailArea = styled.div`
   width: 60%;
+  height: 300px;
   background-color: #dab1bc;
   border-radius: 12px;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   gap: 15px;
   box-shadow: 2px 2px 7px #966874;
 `;
@@ -102,18 +132,23 @@ const DetailArea = styled.div`
 const DetailContent = styled.div`
   background-color: white;
   border-radius: 12px;
-  width: 90%;
+  width: 100%;
   padding: 20px;
   display: flex;
   flex-direction: column;
 `;
 
 const Btns = styled.div`
-  width: 10%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 7px;
+`;
+
+const TitleAndPriority = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 `;
 
 const Title = styled.span`
@@ -127,7 +162,7 @@ const Title = styled.span`
 const Content = styled.span`
   line-height: 180%;
   font-size: 15pt;
-  height: 60px;
+  height: 70px;
 `;
 
 const MoreInfo = styled.span`
@@ -137,10 +172,11 @@ const MoreInfo = styled.span`
 
 const Button = styled.button`
   background-color: #b96e83;
-  width: 40px;
+  width: 50px;
   color: white;
   border: none;
   border-radius: 12px;
+  font-size: 12pt;
   cursor: pointer;
 `;
 
@@ -154,4 +190,32 @@ const GoBackBtn = styled.button`
   border-radius: 12px;
   font-size: 13pt;
   cursor: pointer;
+`;
+
+type PriorityProps = {
+  $priority: number;
+};
+
+const PriorityItem = styled.div<PriorityProps>`
+  width: 60px;
+  height: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+  font-size: 10pt;
+  border-radius: 12px;
+  background-color: ${(props) => {
+    switch (props.$priority) {
+      case 1:
+        return "#009650";
+      case 2:
+        return "#255efa";
+      case 3:
+        return "#ff3164";
+      default:
+        return "transparent";
+    }
+  }};
 `;

@@ -4,8 +4,6 @@ import { Todo } from "../types/todoTypes";
 
 //axios instance 만들어서 반복되는 부분 줄이기
 
-export type TodoId = Pick<Todo, "id" | "isDone">;
-
 export const getTodos = async (): Promise<Todo[]> => {
   try {
     const response = await axios.get<Todo[]>(
@@ -36,12 +34,9 @@ export const deleteTodo = async (id: string) => {
   }
 };
 
-export type UpdatedTodo = {
-  id: string;
-  isDone: boolean;
-};
+export type updatedTodo = Pick<Todo, "id" | "isDone">;
 
-export const updateTodo = async (todo: UpdatedTodo) => {
+export const updateTodo = async (todo: updatedTodo) => {
   try {
     await axios.patch(
       `${process.env.REACT_APP_JSON_SERVER_URL}/todos/${todo.id}`,
@@ -51,5 +46,17 @@ export const updateTodo = async (todo: UpdatedTodo) => {
     );
   } catch (error) {
     console.log("Todo 상태 변경 에러", error);
+  }
+};
+
+export type editedTodo = Pick<Todo, "title" | "content" | "priority">;
+export const editTodo = async (id: string, editedTodo: editedTodo) => {
+  try {
+    await axios.patch(
+      `${process.env.REACT_APP_JSON_SERVER_URL}/todos/${id}`,
+      editedTodo
+    );
+  } catch (error) {
+    console.log("Todo 수정 에러", error);
   }
 };

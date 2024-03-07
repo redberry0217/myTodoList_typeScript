@@ -9,10 +9,6 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  // data.sort((a: Todo, b: Todo) => {
-  //   return b.priority - a.priority;
-  // });
-
   /** Todo 완료 상태 토글 */
   const isDoneToggleMutation = useMutation(updateTodo, {
     onSuccess: () => {
@@ -114,11 +110,11 @@ const PriorityItem = styled.div<PriorityProps>`
   background-color: ${(props) => {
     switch (props.$priority) {
       case 1:
-        return "#008d23";
+        return "#009650";
       case 2:
-        return "#00a2b8";
+        return "#255efa";
       case 3:
-        return "#0042f8";
+        return "#ff3164";
       default:
         return "transparent";
     }

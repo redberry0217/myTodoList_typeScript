@@ -61,11 +61,11 @@ export default function WriteTodo() {
             maxLength={15}
           />
           <input
-            placeholder="내용(30자까지 입력)"
+            placeholder="내용(40자까지 입력)"
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            maxLength={30}
+            maxLength={40}
           />
           <select
             name="priority"
