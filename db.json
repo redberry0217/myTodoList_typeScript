@@ -8,25 +8,11 @@
       "createdAt": "2024-03-06T14:01:59.066Z"
     },
     {
-      "id": "de2a5ce8-516d-484c-a472-6f4534712568",
-      "title": "TypeScript 개인과제",
-      "content": "금요일까지 제출이니 스케줄 관리 꼭꼭 잘하기!",
-      "isDone": false,
-      "createdAt": "2024-03-06T14:51:39.195Z"
-    },
-    {
       "id": "5c79edf5-a969-494e-bc81-f2fa780c555b",
       "title": "TypeScript 강의보기",
       "content": "여러번 반복해서 보고 부족한 부분은 나머지공부!",
       "isDone": false,
       "createdAt": "2024-03-06T14:52:50.771Z"
-    },
-    {
-      "id": "85876495-e0b0-47b7-8031-dd0197c54e5f",
-      "title": "설거지하기",
-      "content": "우아아 설거지를 하자",
-      "isDone": false,
-      "createdAt": "2024-03-07T01:32:20.832Z"
     }
   ]
 }

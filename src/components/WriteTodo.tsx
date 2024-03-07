@@ -3,12 +3,14 @@ import styled from "styled-components";
 import uuid4 from "uuid4";
 import { useMutation, useQueryClient } from "react-query";
 import { addTodo } from "../api/todoApi";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function WriteTodo() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [priority, setPriority] = useState<string>("우선순위");
 
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const mutation = useMutation(addTodo, {
     onSuccess: () => {
@@ -25,17 +27,25 @@ export default function WriteTodo() {
       return;
     }
 
+    if (!priority) {
+      alert(`우선순위를 선택해주세요.`);
+      return;
+    }
+
     const newTodo = {
       id: uuid4(),
       title,
       content,
       isDone: false,
+      priority,
       createdAt: new Date().toISOString(),
     };
 
     mutation.mutate(newTodo);
+    navigate(`/`);
     setTitle("");
     setContent("");
+    setPriority("우선순위");
   };
 
   return (
@@ -57,6 +67,16 @@ export default function WriteTodo() {
             onChange={(e) => setContent(e.target.value)}
             maxLength={30}
           />
+          <select
+            name="priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option value="">우선순위</option>
+            <option value="normal">보통</option>
+            <option value="high">높음</option>
+            <option value="superhigh">매우높음</option>
+          </select>
           <Button $hasContent={!!title && !!content}>등록하기</Button>
         </InputArea>
       </WriteTodoContainer>
@@ -88,6 +108,15 @@ const InputArea = styled.form`
 
   & > input {
     width: 250px;
+    height: 30px;
+    border: 1px solid #966874;
+    border-radius: 12px;
+    padding-left: 10px;
+    font-size: 12pt;
+  }
+
+  & > select {
+    width: 100px;
     height: 30px;
     border: 1px solid #966874;
     border-radius: 12px;

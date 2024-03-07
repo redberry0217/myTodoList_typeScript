@@ -14,13 +14,13 @@ export default function Detail() {
   /** Todo 삭제 */
   const deleteTodoMutation = useMutation(deleteTodo, {
     onSuccess: () => {
-      alert(`Todo가 삭제되었습니다.`);
       queryClient.invalidateQueries("todos");
       navigate(`/`);
     },
   });
 
   const deteleOnClickHanlder = (id: string) => {
+    if (!window.confirm(`Todo를 삭제하시겠습니까?`)) return;
     deleteTodoMutation.mutate(id);
   };
 
@@ -38,7 +38,6 @@ export default function Detail() {
   }
 
   const todoData = data.find((item) => item.id === id);
-
   if (!todoData) {
     return <div>해당 Todo를 찾을 수 없습니다.</div>;
   }

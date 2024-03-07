@@ -23,7 +23,6 @@ export const addTodo = async (newTodo: Todo) => {
   try {
     await axios.post(`${process.env.REACT_APP_JSON_SERVER_URL}/todos`, newTodo);
   } catch (error) {
-    alert(`게시글을 등록하지 못했습니다. 다시 시도해주세요.`);
     console.log("게시글 등록 오류", error);
   }
 };
@@ -31,10 +30,8 @@ export const addTodo = async (newTodo: Todo) => {
 //id를 Todo의 id로 지정하는 것이 좋음
 export const deleteTodo = async (id: string) => {
   try {
-    if (!window.confirm(`Todo를 삭제하시겠습니까?`)) return;
     await axios.delete(`${process.env.REACT_APP_JSON_SERVER_URL}/todos/${id}`);
   } catch (error) {
-    alert(`Todo를 삭제하지 못했습니다. 다시 시도해주세요.`);
     console.log("Todo 삭제 에러", error);
   }
 };
@@ -53,7 +50,6 @@ export const updateTodo = async (todo: UpdatedTodo) => {
       }
     );
   } catch (error) {
-    alert(`Todo 상태를 변경하지 못했습니다. 다시 시도해주세요.`);
     console.log("Todo 상태 변경 에러", error);
   }
 };
