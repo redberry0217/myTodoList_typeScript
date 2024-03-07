@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Todo } from "../types/todoTypes";
+import { EditedTodo, Todo } from "../types/todoTypes";
 
 //axios instance 만들어서 반복되는 부분 줄이기
 
@@ -49,8 +49,12 @@ export const updateTodo = async (todo: updatedTodo) => {
   }
 };
 
-export type editedTodo = Pick<Todo, "title" | "content" | "priority">;
-export const editTodo = async (id: string, editedTodo: editedTodo) => {
+// export type editedTodo = Pick<Todo, "title" | "content" | "priority">;
+export const editTodo = async (idAndEditedTodo: {
+  id: string;
+  editedTodo: EditedTodo;
+}) => {
+  const { id, editedTodo } = idAndEditedTodo;
   try {
     await axios.patch(
       `${process.env.REACT_APP_JSON_SERVER_URL}/todos/${id}`,

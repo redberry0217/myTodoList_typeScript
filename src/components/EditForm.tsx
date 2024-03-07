@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Todo } from "../types/todoTypes";
+import { Todo, EditedTodo } from "../types/todoTypes";
+import { useMutation, useQueryClient } from "react-query";
+import { editTodo } from "../api/todoApi";
 
 export default function EditForm({
   todoData,
@@ -12,14 +14,36 @@ export default function EditForm({
   const [title, setTitle] = useState(todoData.title);
   const [content, setContent] = useState(todoData.content);
   const [priority, setPriority] = useState(todoData.priority);
+  const queryClient = useQueryClient();
 
   const cancelOnClickHandler = () => {
     if (!window.confirm(`Todo 수정을 취소하시겠습니까?`)) return;
     setIsEditing(false);
   };
 
+  const editTodoMutation = useMutation(editTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+  const onSubmitHandler = (id: string) => {
+    if (!window.confirm(`Todo를 수정하시겠습니까?`)) return;
+    const editedTodo: EditedTodo = {
+      title,
+      content,
+      priority,
+    };
+    editTodoMutation.mutate({ id, editedTodo });
+    setIsEditing(false);
+  };
+
   return (
-    <FormContainer>
+    <FormContainer
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmitHandler(todoData.id);
+      }}
+    >
       <TitleAndPriority>
         <Box>
           <Label>제목</Label>

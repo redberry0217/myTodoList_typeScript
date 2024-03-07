@@ -77,10 +77,10 @@ export default function Detail() {
                   </PriorityItem>
                 </TitleAndPriority>
                 <Content>{todoData.content}</Content>
-                <MoreInfo>❤️등록일: {formattedData}</MoreInfo>
+                <MoreInfo>❤️등록일시: {formattedData}</MoreInfo>
                 <MoreInfo>
                   ❤️상태:{" "}
-                  {todoData.isDone ? "✔️이미 완료됨!" : "😮이제 해야함!"}
+                  {todoData.isDone ? "✔️이미 완료됨!" : "😮아직 하는중!"}
                 </MoreInfo>
               </>
             )}

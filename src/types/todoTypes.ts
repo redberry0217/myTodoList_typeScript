@@ -6,3 +6,9 @@ export type Todo = {
   priority: number;
   createdAt: string;
 };
+
+export type EditedTodo = {
+  title: string;
+  content: string;
+  priority: number;
+};
