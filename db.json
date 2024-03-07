@@ -1,14 +1,6 @@
 {
   "todos": [
     {
-      "id": "8cfec999-e072-4f93-8082-6c051c9cfbd6",
-      "title": "TypeScript 개인과제",
-      "content": "3/8(금)제출! 진행상황, 스케줄 체크 필수!",
-      "isDone": false,
-      "priority": 3,
-      "createdAt": "2024-03-07T10:23:05.910Z"
-    },
-    {
       "id": "e09262eb-fe90-436d-8f99-f2b207d9c26e",
       "title": "올리브영 쇼핑",
       "content": "생일 깊티 쓰기☺️",
@@ -31,6 +23,14 @@
       "isDone": false,
       "priority": 2,
       "createdAt": "2024-03-07T10:27:26.581Z"
+    },
+    {
+      "id": "a5021057-3541-423e-bf15-778a31aacc66",
+      "title": "TypeScript 개인과제",
+      "content": "3/8(금)제출! 진행상황, 스케줄 필수 체크하고 ReadMe 작성 필수",
+      "isDone": false,
+      "priority": 3,
+      "createdAt": "2024-03-07T12:59:01.651Z"
     }
   ]
 }

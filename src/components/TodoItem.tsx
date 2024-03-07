@@ -4,6 +4,7 @@ import { Todo } from "../types/todoTypes";
 import { useMutation, useQueryClient } from "react-query";
 import { updateTodo } from "../api/todoApi";
 import { useNavigate } from "react-router-dom";
+import { omitText } from "../util/content";
 
 export default function TodoItem({ data }: { data: Todo[] }) {
   const queryClient = useQueryClient();
@@ -37,7 +38,7 @@ export default function TodoItem({ data }: { data: Todo[] }) {
                 {item.isDone ? "✔️" : null}
                 {item.title}
               </Title>
-              <Content>{item.content}</Content>
+              <Content>{omitText(item.content, 30)}</Content>
               <Btns $isDone={item.isDone}>
                 {item.isDone ? null : (
                   <PriorityItem $priority={item.priority}>
@@ -68,7 +69,7 @@ type IsDoneProps = {
 };
 
 const Box = styled.div<IsDoneProps>`
-  width: 200px;
+  width: 220px;
   padding: 10px;
   background-color: ${(props) => (props.$isDone ? "#fae3e9" : "white")};
   border-radius: 12px;
