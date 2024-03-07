@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Todo } from "../axios/todos";
+import { Todo } from "../types/todoTypes";
 import { useMutation, useQueryClient } from "react-query";
-import { updateTodo } from "../axios/todos";
+import { updateTodo } from "../api/todoApi";
 import { useNavigate } from "react-router-dom";
 
 export default function TodoItem({ data }: { data: Todo[] }) {
@@ -30,10 +30,10 @@ export default function TodoItem({ data }: { data: Todo[] }) {
         : data.map((item) => (
             <Box
               key={item.id}
-              $isDone={item.isDone as boolean}
+              $isDone={item.isDone}
               onClick={() => navigate(`/detail/${item.id}`)}
             >
-              <Title $isDone={item.isDone as boolean}>
+              <Title $isDone={item.isDone}>
                 {item.isDone ? "✔️" : null}
                 {item.title}
               </Title>
@@ -54,6 +54,7 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   );
 }
 
+//스타일컴포넌트 전용 props
 type IsDoneProps = {
   $isDone: boolean;
 };

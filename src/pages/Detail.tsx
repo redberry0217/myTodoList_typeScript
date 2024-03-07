@@ -1,9 +1,10 @@
 import React from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
-import { Todo, deleteTodo, getTodos } from "../axios/todos";
+import { deleteTodo } from "../api/todoApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { dateFormat } from "../util/date";
+import { useTodo } from "../hooks/useTodo";
 
 export default function Detail() {
   const queryClient = useQueryClient();
@@ -24,16 +25,15 @@ export default function Detail() {
   };
 
   /** 클릭한 Todo 내용 불러오기 */
-  const { isLoading, isError, data, isIdle } = useQuery<Todo[]>(
-    "todos",
-    getTodos
-  );
+  const { data, isLoading, isError, isIdle } = useTodo();
 
   if (isLoading || isIdle) {
     return <div>데이터 로드중...</div>;
   }
-
   if (isError) {
+    return <div>데이터를 가져올 수 없습니다. 다시 시도하세요.</div>;
+  }
+  if (!data) {
     return <div>데이터를 가져올 수 없습니다. 다시 시도하세요.</div>;
   }
 
@@ -44,6 +44,10 @@ export default function Detail() {
   }
 
   const formattedData = dateFormat(todoData.createdAt);
+
+  if (!id) {
+    return navigate(`/`);
+  }
 
   return (
     <>
@@ -60,9 +64,7 @@ export default function Detail() {
           </DetailContent>
           <Btns>
             <Button>수정</Button>
-            <Button onClick={() => deteleOnClickHanlder(id as string)}>
-              삭제
-            </Button>
+            <Button onClick={() => deteleOnClickHanlder(id)}>삭제</Button>
           </Btns>
         </DetailArea>
         <GoBackBtn onClick={() => navigate(`/`)}>뒤로가기</GoBackBtn>

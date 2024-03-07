@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import uuid4 from "uuid4";
 import { useMutation, useQueryClient } from "react-query";
-import { addTodo } from "../axios/todos";
+import { addTodo } from "../api/todoApi";
 import { Outlet } from "react-router-dom";
 
 export default function WriteTodo() {
@@ -57,7 +57,7 @@ export default function WriteTodo() {
             onChange={(e) => setContent(e.target.value)}
             maxLength={30}
           />
-          <Button>등록하기</Button>
+          <Button $hasContent={!!title && !!content}>등록하기</Button>
         </InputArea>
       </WriteTodoContainer>
       <Outlet />
@@ -96,8 +96,12 @@ const InputArea = styled.form`
   }
 `;
 
-const Button = styled.button`
-  background-color: #b96e83;
+type HasContentProps = {
+  $hasContent: boolean;
+};
+
+const Button = styled.button<HasContentProps>`
+  background-color: ${(props) => (props.$hasContent ? "#b96e83" : "gray")};
   color: white;
   border: none;
   border-radius: 12px;

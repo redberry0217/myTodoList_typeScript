@@ -1,13 +1,10 @@
 import React from "react";
 import axios from "axios";
+import { Todo } from "../types/todoTypes";
 
-export type Todo = {
-  id: string;
-  title: string;
-  content: string;
-  isDone: boolean;
-  createdAt: string;
-};
+//axios instance 만들어서 반복되는 부분 줄이기
+
+export type TodoId = Pick<Todo, "id" | "isDone">;
 
 export const getTodos = async (): Promise<Todo[]> => {
   try {
@@ -31,6 +28,7 @@ export const addTodo = async (newTodo: Todo) => {
   }
 };
 
+//id를 Todo의 id로 지정하는 것이 좋음
 export const deleteTodo = async (id: string) => {
   try {
     if (!window.confirm(`Todo를 삭제하시겠습니까?`)) return;
