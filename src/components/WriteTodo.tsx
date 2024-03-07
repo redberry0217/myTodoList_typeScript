@@ -8,7 +8,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 export default function WriteTodo() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [priority, setPriority] = useState<string>("우선순위");
+  const [priority, setPriority] = useState<number>(0);
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -45,7 +45,7 @@ export default function WriteTodo() {
     navigate(`/`);
     setTitle("");
     setContent("");
-    setPriority("우선순위");
+    setPriority(0);
   };
 
   return (
@@ -70,12 +70,12 @@ export default function WriteTodo() {
           <select
             name="priority"
             value={priority}
-            onChange={(e) => setPriority(e.target.value)}
+            onChange={(e) => setPriority(parseInt(e.target.value))}
           >
-            <option value="">우선순위</option>
-            <option value="보통">보통</option>
-            <option value="중요">중요</option>
-            <option value="매우중요">매우중요</option>
+            <option value={0}>우선순위</option>
+            <option value={1}>보통</option>
+            <option value={2}>중요</option>
+            <option value={3}>매우중요</option>
           </select>
           <Button $hasContent={!!title && !!content}>등록하기</Button>
         </InputArea>

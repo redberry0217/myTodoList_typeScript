@@ -3,6 +3,6 @@ export type Todo = {
   title: string;
   content: string;
   isDone: boolean;
-  priority: string;
+  priority: number;
   createdAt: string;
 };

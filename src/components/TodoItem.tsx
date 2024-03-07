@@ -9,6 +9,10 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
+  // data.sort((a: Todo, b: Todo) => {
+  //   return b.priority - a.priority;
+  // });
+
   /** Todo 완료 상태 토글 */
   const isDoneToggleMutation = useMutation(updateTodo, {
     onSuccess: () => {
@@ -41,7 +45,11 @@ export default function TodoItem({ data }: { data: Todo[] }) {
               <Btns $isDone={item.isDone}>
                 {item.isDone ? null : (
                   <PriorityItem $priority={item.priority}>
-                    {item.priority}
+                    {item.priority === 3
+                      ? "매우중요"
+                      : item.priority === 2
+                      ? "중요"
+                      : "보통"}
                   </PriorityItem>
                 )}
                 <Button
@@ -93,7 +101,7 @@ const Btns = styled.div<IsDoneProps>`
 `;
 
 type PriorityProps = {
-  $priority: string;
+  $priority: number;
 };
 
 const PriorityItem = styled.div<PriorityProps>`
@@ -105,11 +113,11 @@ const PriorityItem = styled.div<PriorityProps>`
   border-radius: 12px;
   background-color: ${(props) => {
     switch (props.$priority) {
-      case "보통":
+      case 1:
         return "#008d23";
-      case "중요":
+      case 2:
         return "#00a2b8";
-      case "매우중요":
+      case 3:
         return "#0042f8";
       default:
         return "transparent";
