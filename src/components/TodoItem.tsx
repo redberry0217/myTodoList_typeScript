@@ -25,24 +25,31 @@ export default function TodoItem({ data }: { data: Todo[] }) {
 
   return (
     <>
-      {data.map((item) => (
-        <Box
-          key={item.id}
-          $isDone={item.isDone as boolean}
-          onClick={() => navigate(`/detail/${item.id}`)}
-        >
-          <Title $isDone={item.isDone as boolean}>
-            {item.isDone ? "✔️" : null}
-            {item.title}
-          </Title>
-          <Content>{item.content}</Content>
-          <Btns>
-            <Button onClick={() => isDoneToggleHandler(item.id, item.isDone)}>
-              {item.isDone ? "취소" : "완료"}
-            </Button>
-          </Btns>
-        </Box>
-      ))}
+      {data.length === 0
+        ? "항목이 없습니다."
+        : data.map((item) => (
+            <Box
+              key={item.id}
+              $isDone={item.isDone as boolean}
+              onClick={() => navigate(`/detail/${item.id}`)}
+            >
+              <Title $isDone={item.isDone as boolean}>
+                {item.isDone ? "✔️" : null}
+                {item.title}
+              </Title>
+              <Content>{item.content}</Content>
+              <Btns>
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    isDoneToggleHandler(item.id, item.isDone);
+                  }}
+                >
+                  {item.isDone ? "취소" : "완료"}
+                </Button>
+              </Btns>
+            </Box>
+          ))}
     </>
   );
 }

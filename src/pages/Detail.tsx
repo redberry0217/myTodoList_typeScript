@@ -111,6 +111,7 @@ const Btns = styled.div`
   width: 10%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 7px;
 `;
 

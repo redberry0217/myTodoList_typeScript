@@ -50,7 +50,7 @@ const AreaLabel = styled.div`
   font-size: 15pt;
   line-height: 190%;
   font-weight: bold;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 
 const TodoArea = styled.div`
