@@ -73,9 +73,9 @@ export default function WriteTodo() {
             onChange={(e) => setPriority(e.target.value)}
           >
             <option value="">우선순위</option>
-            <option value="normal">보통</option>
-            <option value="high">높음</option>
-            <option value="superhigh">매우높음</option>
+            <option value="보통">보통</option>
+            <option value="중요">중요</option>
+            <option value="매우중요">매우중요</option>
           </select>
           <Button $hasContent={!!title && !!content}>등록하기</Button>
         </InputArea>

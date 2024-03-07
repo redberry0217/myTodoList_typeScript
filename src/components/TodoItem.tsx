@@ -38,7 +38,12 @@ export default function TodoItem({ data }: { data: Todo[] }) {
                 {item.title}
               </Title>
               <Content>{item.content}</Content>
-              <Btns>
+              <Btns $isDone={item.isDone}>
+                {item.isDone ? null : (
+                  <PriorityItem $priority={item.priority}>
+                    {item.priority}
+                  </PriorityItem>
+                )}
                 <Button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -54,7 +59,6 @@ export default function TodoItem({ data }: { data: Todo[] }) {
   );
 }
 
-//스타일컴포넌트 전용 props
 type IsDoneProps = {
   $isDone: boolean;
 };
@@ -82,12 +86,35 @@ const Content = styled.span`
   height: 60px;
 `;
 
-const Btns = styled.div`
+const Btns = styled.div<IsDoneProps>`
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${(props) => (props.$isDone ? "flex-end" : "space-between")};
   margin-top: 20px;
-  gap: 7px;
-  bottom: 0px;
+`;
+
+type PriorityProps = {
+  $priority: string;
+};
+
+const PriorityItem = styled.div<PriorityProps>`
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  font-size: 10pt;
+  border-radius: 12px;
+  background-color: ${(props) => {
+    switch (props.$priority) {
+      case "보통":
+        return "#008d23";
+      case "중요":
+        return "#00a2b8";
+      case "매우중요":
+        return "#0042f8";
+      default:
+        return "transparent";
+    }
+  }};
 `;
 
 const Button = styled.button`
