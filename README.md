@@ -1,47 +1,51 @@
-# Getting Started with Create React App
+# ❤️ MY TODO LIST❤️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TypeScript를 활용하여 다시 만들어 본 투두리스트 입니다.
 
-## Available Scripts
+우선순위 설정, 정렬 기능, 상세페이지 기능도 추가해보았습니다.
 
-In the project directory, you can run:
+## ✨개발 기간
 
-### `npm start`
+2024.02.04(월) ~ 08(금)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ✨시작 가이드
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+$ git clone https://github.com/redberry0217/myTodoList_typeScript.git
+$ npm install
+$ npm run db (localhost:4000)
+$ npm start
+```
 
-### `npm test`
+## ✨페이지와 기능
+### 메인 페이지
+  * 헤더에서 제목, 내용을 입력하고 우선순위를 선택하여 새로운 Todo를 등록
+  * 등록된 Todo List와 Done List를 아래에 표시
+  * 우상단에 있는 select를 통해 우선순, 최신등록순으로 Todo List를 소팅
+  * Todo의 내용이 길어지면 ...로 생략처리
+  * Todo의 완료버튼 클릭 시 해당 Todo를 Done List로 이동
+  * Done List에서 취소버튼 클릭 시 해당 Todo를 Todo List로 이동
+  * Todo 클릭 시 해당 Todo의 상세페이지로 이동
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 상세 페이지
+  * 클릭한 Todo의 상세 페이지
+  * 메인에서 ...로 생략되었던 내용을 모두 표시
+  * Todo의 등록일시와 완료 여부를 표시
+  * 수정 버튼을 클릭하여 Todo의 제목, 내용, 우선순위를 수정
+  * 삭제 버튼을 클릭하여 해당 Todo를 삭제
+  * 뒤로가기 버튼 클릭 시 메인 페이지로 이
 
-### `npm run build`
+## ✨사용된 기술
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  * React
+  * React-Query
+  * Axios
+  * Styled-components
+  * Json-server
+  * TypeScript
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ✨어려웠던 점
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# myTodoList_typeScript
+  * `TypeScript`가 가장 어려웠습니다. 새로운 Type(Interface)를 만들어주고 적용해주는 것이 낯설었고, '보내주기로 한 데이터'와 '받기로 한 데이터'의 타입을 일치시켜 주는 것이 어려웠습니다. 특히 관련해서는 Todo를 수정하는 부분에서 가장 헤맸던 것 같습니다.
+  * 이렇게나 많은 에러 가능성이 도처에 도사리고 있는 채로 기존에 개발을 했었구나 하고 깨달을 수 있기도 했습니다.
+  * 처음에는 Todo 우선순위 3가지(보통, 중요, 매우중요)를 `enum`으로 작성해보려고 했는데 잘 안되어서 포기했습니다. enum, object literal에 대해서 좀 더 공부해야겠다고 생각했습니다.
