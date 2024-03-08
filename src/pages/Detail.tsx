@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
 import { deleteTodo } from "../api/todoApi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { dateFormat } from "../util/date";
 import { useTodo } from "../hooks/useTodo";
 import EditForm from "../components/EditForm";
@@ -51,7 +51,7 @@ export default function Detail() {
   const formattedData = dateFormat(todoData.createdAt);
 
   if (!id) {
-    return navigate(`/`);
+    return <Navigate to="/" />;
   }
 
   return (
