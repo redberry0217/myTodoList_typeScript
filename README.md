@@ -1,5 +1,7 @@
 # ❤️ MY TODO LIST❤️
 
+![image](https://github.com/redberry0217/myTodoList_typeScript/assets/153061626/e9c81d97-c98e-4557-b3fe-e703e2494feb)
+
 TypeScript를 활용하여 다시 만들어 본 투두리스트 입니다.
 
 우선순위 설정, 정렬 기능, 상세페이지 기능도 추가해보았습니다.
